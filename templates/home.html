@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block head %}
+<script type='text/javascript'>
+function go()
+{
+	window.location.pathname = 'user/' + document.spoj.u_name1.value;
+}
+</script>
+<link href='{{ STATIC_URL }}css/home.css' rel='stylesheet' type='text/css'>
+{% endblock %}
+
+{% block content %}
+<div id = "ip_area">
+<form name='spoj' action='javascript: go();'>
+<input class = 'elt' type='text' name='u_name1' size='25' placeholder="Username 1" /><br />
+<input class = 'elt' type='text' name='u_name2' size='25' placeholder="Username 2 (Coming Soon)" disabled /><br />
+<input id = 'button' class = 'elt' type='submit' value='Go!'/>
+</form>
+</div>
+{% endblock %}

@@ -1,0 +1,39 @@
+h1 {
+	color: white;
+	font-style: italic;
+	color: green;
+}
+hr {
+	width: 40%;
+	text-align: left;
+	margin-left: 0;
+	color: green;
+}
+body {
+	/*background-image: url('../img/bg.jpg');*/
+	background-color: #000000;
+}
+#credit{
+	text-align: right;
+	width: 40%;
+	color: white;
+	font-style: italic;
+	margin-bottom: 0px;
+	margin-top: -35px;
+}
+#content{
+	width: 70%;
+	margin-left:  auto;
+	margin-right: auto;
+	margin-top: 100px;
+	background-color:  	#C0C0C0;
+	border-radius: 10px;
+	padding: 25px 27px 25px 27px;
+}
+#topbar{
+	background-color: rgba(0,0,0,0.9);
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+}

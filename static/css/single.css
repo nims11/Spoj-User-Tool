@@ -1,0 +1,68 @@
+#username{
+	font-style: italic;
+	color: red;
+}
+.mini{
+	width: 40%;
+	left: 10px;
+	border-collapse: collapse;
+}
+#back{
+	top: -10px;
+	position: relative;
+	text-align: right;
+}
+.mini tr td{
+	padding: 5px 5px 5px 5px;
+}
+.mini tr td:nth-child(1){
+	font-style: italic;
+}
+.mini tr td:nth-child(2){
+	text-align: right;
+}
+.mini tbody tr:hover{
+	background-color: #5F9EA0;
+}
+thead th:nth-child(1){
+	text-align: left;
+}
+thead th:nth-child(2){
+	text-align: right;
+}
+thead th{
+	border-width: 0px 0px 1px 0px;
+	border-style: solid;
+	padding: 5px 0px 5px 0px;
+}
+thead th a{
+	color: red;
+}
+#cla_sec{
+	width: 50%;
+	float: right;
+}
+.short_hr_cla{
+	width: 85%;
+}
+#classical{
+	width: 100%;
+}
+#classical_container{
+	overflow: scroll;
+	height: 400px;
+}
+/*table.imagetable th {
+	background:#b5cfd2 url('cell-blue.jpg');
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #999999;
+}
+table.imagetable td {
+	background:#dcddc0 url('cell-grey.jpg');
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #999999;
+}*/

@@ -1,0 +1,159 @@
+{% extends "base.html" %}
+
+{% block title %}Result For {{ main.user_name }} | Spoj User Tool by nims11{% endblock %}
+
+{% block head %}
+<link href='{{ STATIC_URL }}css/single.css' rel='stylesheet' type='text/css'>
+<script type='text/javascript'>
+	$.tablesorter.addParser({ 
+        id: 'classical', 
+        is: function(s) { 
+            return false; 
+        }, 
+        format: function(s) { 
+            return s.toLowerCase().replace(/ days ago/,''); 
+        }, 
+        type: 'numeric' 
+    }); 
+	$(document).ready(function (){
+		$('#classical').tablesorter({
+			headers: {
+				1: {
+					sorter: 'classical'
+				}
+			}
+		});
+	});
+	$(document).ready(function() {
+		$('#lang_info').tablesorter();
+	});
+</script>
+{% endblock %}
+
+{% block content %}
+<div id='back'>
+<a href='../../'>Back To Home</a>
+</div>
+<div id = 'cla_sec'>
+	<i><h2>Classical Problems Solved</h2></i>
+	<hr class="short_hr_cla"><br />
+	<div id='classical_container'>
+	<table id='classical' class='mini'>
+		<thead>
+			<tr>
+				<th><a href=''>Problem ID</a></th>
+				<th><a href=''>Solved on</a></th>
+			</td>
+		</thead>
+		<tbody>
+		{% for key, value in main.classical_table.items %}
+			<tr>
+				<td>{{ key }}</td>
+				<td>{{ value }}</td>
+			</tr>
+		{% endfor %}
+		</tbody>
+	</table>
+	</div>
+</div>
+<h2>Spoj User <a id="username" href="http://www.spoj.pl/users/{{ main.user_name }}">{{ main.user_name }}</a></h2>
+<hr><br />
+<table id='basic_info' class='mini'>
+<tbody>
+	<tr>
+		<td>Name</td>
+		<td>{{ main.name }}</td>
+	</tr>
+	<tr>
+		<td>World Rank</td>
+		<td>{{ main.rank }}</td>
+	</tr>
+	<tr>
+		<td>Points</td>
+		<td>{{ main.points }}</td>
+	</tr>
+	<tr>
+		<td>Problems Solved</td>
+		<td>{{ main.probPool.total_solved }}</td>
+	</tr>
+	<tr>
+		<td>Classical Problems Solved</td>
+		<td>{{ main.classical_total }}</td>
+	</tr>
+</tbody>
+</table>
+<br />
+
+
+<i><h2>Submission Stats</h2></i>
+<hr class="short_hr"><br />
+<table id='sub_status_info' class='mini'>
+<tbody>
+	<tr>
+		<td>Total</td>
+		<td>{{ main.submission.total }}</td>
+	</tr>
+{% for key, value in main.submission.main.items %}
+	<tr>
+		<td>{{ key }}</td>
+		<td>{{ value }}</td>
+	</tr>
+{% endfor %}
+</tbody>
+</table>
+<br />
+<table id='sub_misc_info' class='mini'>
+<tbody>
+	<tr>
+		<td>Average no. of Attempts to solve</td>
+		<td>{{ main.probPool.avg_attempt }}</td>
+	</tr>
+	<tr>
+		<td>First Attempt Accepted</td>
+		<td>{{ main.probPool.first_attempt }}</td>
+	</tr>
+	<tr>
+		<td>Most number of Attempts</td>
+		<td>{{ main.probPool.most_attempt }} ({{ main.probPool.most_attempt_ques }})</td>
+	</tr>
+	<tr>
+		<td>Latest Problem Solved</td>
+		<td>{{ main.probPool.latest }}</td>
+	</tr>
+	<tr>
+		<td>Average per day</td>
+		<td>{{ main.probPool.avg_day }}</td>
+	</tr>
+	<tr>
+		<td>Most in a day</td>
+		<td>{{ main.probPool.most_day }} ({{ main.probPool.most_day_val }})</td>
+	</tr>
+	<tr>
+		<td>Most in a Month</td>
+		<td>{{ main.probPool.most_month }} ({{ main.probPool.most_month_val }})</td>
+	</tr>
+</tbody>
+</table>
+<br />
+
+<i><h2>Language Stats</h2></i>
+<hr class="short_hr"><br />
+<table id='lang_info' class='mini'>
+<thead>
+	<tr>
+		<th><a href=''>Language ID</a></th>
+		<th><a href=''>Submissions</a></th>
+	</tr>
+</thead>
+<tbody>
+{% for key, value in main.lang.main.items %}
+	<tr>
+		<td>{{ key }}</td>
+		<td>{{ value }}</td>
+	</tr>
+{% endfor %}
+</tbody>
+</table>
+<br />
+
+{% endblock %}
