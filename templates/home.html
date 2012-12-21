@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Home{% endblock %}
+{% block title %}Home | Spoj User Tool by nims11{% endblock %}
 
 {% block head %}
 <script type='text/javascript'>
@@ -9,7 +9,7 @@ function go()
 	window.location.pathname = 'user/' + document.spoj.u_name1.value;
 }
 </script>
-<link href='{{ STATIC_URL }}css/home.css' rel='stylesheet' type='text/css'>
+<link href='/static/css/home.css' rel='stylesheet' type='text/css'>
 {% endblock %}
 
 {% block content %}
