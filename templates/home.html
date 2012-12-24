@@ -6,7 +6,10 @@
 <script type='text/javascript'>
 function go()
 {
-	window.location.pathname = 'user/' + document.spoj.u_name1.value;
+	if(document.spoj.u_name2.value=="")
+		window.location.pathname = 'user/' + document.spoj.u_name1.value;
+	else
+		window.location.pathname = 'user/' + document.spoj.u_name1.value + '/' + document.spoj.u_name2.value;
 }
 </script>
 <link href='/static/css/home.css' rel='stylesheet' type='text/css'>
@@ -16,7 +19,7 @@ function go()
 <div id = "ip_area">
 <form name='spoj' action='javascript: go();'>
 <input class = 'elt' type='text' name='u_name1' size='25' placeholder="Username 1" /><br />
-<input class = 'elt' type='text' name='u_name2' size='25' placeholder="Username 2 (Coming Soon)" disabled /><br />
+<input class = 'elt' type='text' name='u_name2' size='25' placeholder="Username 2 (Optional)" /><br />
 <input id = 'button' class = 'elt' type='submit' value='Go!'/>
 </form>
 </div>
