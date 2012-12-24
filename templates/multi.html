@@ -1,0 +1,251 @@
+{% extends "base.html" %}
+
+{% block title %}Result For {{ main.user_name.0 }} vs {{ main.user_name.1 }} | Spoj User Tool by nims11{% endblock %}
+
+{% block head %}
+<link href='/static/css/multi.css' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+<script type='text/javascript'>
+$(document).ready(function() {
+	$( "#accordion" ).accordion({
+		collapsible: true,
+		active: false,
+		autoHeight: false,
+	});
+	$(document).ready(function() {
+		$('#lang_info').tablesorter();
+	});
+	$('.compare_tr').each(function() {
+		var $tag1 = $(this).find(':nth-child(2)');
+		var $tag2 = $(this).find(':nth-child(3)');
+		var val1, val2;
+		if($(this).hasClass('texted'))
+		{
+			val1 = parseFloat($tag1.text().substr(0, $tag1.text().indexOf(" ")));
+			val2 = parseFloat($tag2.text().substr(0, $tag2.text().indexOf(" ")));
+		}else{
+			val1 = parseFloat($tag1.text());
+			val2 = parseFloat($tag2.text());
+		}
+		if(!isNaN(val1) && !isNaN(val2)){
+			if(val1<=val2){
+				$tag2.attr('class', 'better');
+			}
+			else{
+				$tag2.attr('class', 'notbetter');
+			}
+
+			if(val1>=val2){
+				$tag1.attr('class', 'better');
+			}
+			else{
+				$tag1.attr('class', 'notbetter');
+			}
+		}
+	});
+	$('.compare_tr_inv').each(function() {
+		var $tag1 = $(this).find(':nth-child(2)');
+		var $tag2 = $(this).find(':nth-child(3)');
+		var val1 = parseFloat($tag1.text());
+		var val2 = parseFloat($tag2.text());
+		if(!isNaN(val1) && !isNaN(val2)){
+			if(val1<val2){
+				$tag1.attr('class', 'better');
+				$tag2.attr('class', 'notbetter');
+			}
+			else{
+				$tag1.attr('class', 'notbetter');
+				$tag2.attr('class', 'better');
+			}
+		}
+	});
+	$.tablesorter.addParser({ 
+        id: 'classical', 
+        is: function(s) { 
+            return false; 
+        }, 
+        format: function(s) { 
+            return s.toLowerCase().replace(/ days ago/,''); 
+        }, 
+        type: 'numeric' 
+    }); 
+	$(document).ready(function (){
+		$('.classical').tablesorter({
+			headers: {
+				1: {
+					sorter: 'classical'
+				}
+			}
+		});
+	});
+});
+</script>
+{% endblock %}
+{% block content %}
+<div id='back'>
+<a href='../../'>Back To Home</a>
+</div>
+
+<h2>
+	Spoj User <a class="username" href="http://www.spoj.pl/users/{{ main.user_name.0 }}">{{ main.user_name.0 }}</a>
+	vs
+	<a class="username" href="http://www.spoj.pl/users/{{ main.user_name.1 }}">{{ main.user_name.1 }}</a>
+</h2>
+<hr style='width: 60%'><br />
+<table id='basic_info' class='mini'>
+<tbody>
+	<tr>
+		<td>Name</td>
+		<td>{{ main.name.0 }}</td>
+		<td>{{ main.name.1 }}</td>
+	</tr>
+	<tr class='compare_tr_inv'>
+		<td>World Rank</td>
+		<td>{{ main.rank.0 }}</td>
+		<td>{{ main.rank.1 }}</td>
+	</tr>
+	<tr class='compare_tr'>
+		<td>Points</td>
+		<td>{{ main.points.0 }}</td>
+		<td>{{ main.points.1 }}</td>
+	</tr>
+	<tr class='compare_tr'>
+		<td>Problems Solved</td>
+		<td>{{ main.total_solved.0 }}</td>
+		<td>{{ main.total_solved.1 }}</td>
+	</tr>
+	<tr class='compare_tr'>
+		<td>Classical Problems Solved</td>
+		<td>{{ main.classical_total.0 }}</td>
+		<td>{{ main.classical_total.1 }}</td>
+	</tr>
+</tbody>
+</table>
+<br /><br />
+<div id='accordion'>
+	<h3>Submission Stats</h3>
+	<div id='sub_container'>
+		<table id='sub_status_info' class='mini'>
+		<tbody>
+			<tr>
+				<td></td>
+				<td class='user_name'>{{ main.user_name.0 }}</td>
+				<td class='user_name'>{{ main.user_name.1 }}</td>
+			</tr>
+			<tr class = 'compare_tr'>
+				<td>Total</td>
+				<td>{{ main.submission_total.0 }}</td>
+				<td>{{ main.submission_total.1 }}</td>
+			</tr>
+		{% for key, value in main.submission.items %}
+			<tr class = {% if value.2 %}'compare_tr'{% else %}'compare_tr_inv'{% endif %}>
+				<td>{{ key }}</td>
+				<td>{{ value.0 }}</td>
+				<td>{{ value.1 }}</td>
+			</tr>
+		{% endfor %}
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr class='compare_tr_inv'>
+				<td>Average no. of Attempts to solve</td>
+				<td>{{ main.avg_attempt.0 }}</td>
+				<td>{{ main.avg_attempt.1 }}</td>
+			</tr>
+			<tr class='compare_tr'>
+				<td>First Attempt Accepted</td>
+				<td>{{ main.first_attempt.0 }}</td>
+				<td>{{ main.first_attempt.1 }}</td>
+			</tr>
+			<tr class='compare_tr_inv texted'>
+				<td>Most number of Attempts</td>
+				<td>{{ main.most_attempt.0 }} ({{ main.most_attempt_ques.0 }})</td>
+				<td>{{ main.most_attempt.1 }} ({{ main.most_attempt_ques.1 }})</td>
+			</tr>
+			<tr>
+				<td>Latest Problem Solved</td>
+				<td>{{ main.latest.0 }}</td>
+				<td>{{ main.latest.1 }}</td>
+			</tr>
+			<tr class='compare_tr'>
+				<td>Average per day</td>
+				<td>{{ main.avg_day.0 }}</td>
+				<td>{{ main.avg_day.1 }}</td>
+			</tr>
+			<tr class='compare_tr texted'>
+				<td>Most in a day</td>
+				<td>{{ main.most_day.0 }} ({{ main.most_day_val.0 }})</td>
+				<td>{{ main.most_day.1 }} ({{ main.most_day_val.1 }})</td>
+			</tr>
+			<tr class='compare_tr texted'>
+				<td>Most in a Month</td>
+				<td>{{ main.most_month.0 }} ({{ main.most_month_val.0 }})</td>
+				<td>{{ main.most_month.1 }} ({{ main.most_month_val.1 }})</td>
+			</tr>
+		</tbody>
+		</table>
+	</div>
+	<h3>Language Stats</h3>
+	<div>
+		<table id='lang_info' class='mini'>
+		<thead>
+			<tr>
+				<th><a href=''>Language ID</a></th>
+				<th><a href=''>({{main.user_name.0}})</a></th>
+				<th><a href=''>({{main.user_name.1}})</a></th>
+			</tr>
+		</thead>
+		<tbody>
+		{% for key, value in main.lang.items %}
+			<tr class='compare_tr'>
+				<td>{{ key }}</td>
+				<td>{{ value.0 }}</td>
+				<td>{{ value.1 }}</td>
+			</tr>
+		{% endfor %}
+		</tbody>
+		</table>
+	</div>
+	<h3>Classical Problems solved by <font class='user_name'>{{ main.user_name.0 }}</font> but not by <font class='user_name'>{{ main.user_name.1 }}</font></h3>
+	<div class='classical_container'>
+	<table class='mini classical'>
+		<thead>
+			<tr>
+				<th><a href=''>Problem ID</a></th>
+				<th><a href=''>Solved on</a></th>
+			</td>
+		</thead>
+		<tbody>
+		{% for key, value in main.table_solved_1.items %}
+			<tr>
+				<td>{{ key }}</td>
+				<td>{{ value }}</td>
+			</tr>
+		{% endfor %}
+		</tbody>
+	</table>
+	</div>
+	<h3>Classical Problems solved by <font class='user_name'>{{ main.user_name.1 }}</font> but not by <font class='user_name'>{{ main.user_name.0 }}</font></h3>
+	<div class='classical_container'>
+	<table class='mini classical'>
+		<thead>
+			<tr>
+				<th><a class='th_val' href=''>Problem ID</a></th>
+				<th><a class='th_val' href=''>Solved on</a></th>
+			</td>
+		</thead>
+		<tbody>
+		{% for key, value in main.table_solved_2.items %}
+			<tr>
+				<td>{{ key }}</td>
+				<td>{{ value }}</td>
+			</tr>
+		{% endfor %}
+		</tbody>
+	</table>
+	</div>
+</div>
+{% endblock %}

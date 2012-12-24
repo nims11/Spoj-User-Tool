@@ -4,7 +4,7 @@ import os
 PROJECT_PATH = os.path.realpath(os.path.dirname('__file__'))
 # Django settings for Spoj_User_Tool project.
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (

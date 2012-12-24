@@ -3,6 +3,11 @@ h1 {
 	font-style: italic;
 	color: green;
 }
+h1 a{
+	color: white;
+	font-style: italic;
+	color: green;
+}
 hr {
 	width: 40%;
 	text-align: left;
@@ -48,6 +53,7 @@ body {
 	left: 0px;
 	top: 0px;
 	width: 100%;
+	z-index: 10;
 }
 #links{
 	float: right;
