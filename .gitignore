@@ -4,3 +4,4 @@
 autoload
 dbindexer
 django*
+secret_key.py
