@@ -48,7 +48,7 @@
 		<tbody>
 		{% for key, value in main.classical_table.items %}
 			<tr>
-				<td>{{ key }}</td>
+				<td><a href='http://www.spoj.com/problems/{{ key }}/'>{{ key }}</a></td>
 				<td>{{ value }}</td>
 			</tr>
 		{% endfor %}
@@ -114,11 +114,11 @@
 	</tr>
 	<tr>
 		<td>Most number of Attempts</td>
-		<td>{{ main.probPool.most_attempt }} ({{ main.probPool.most_attempt_ques }})</td>
+		<td>{{ main.probPool.most_attempt }} (<a href='http://www.spoj.com/problems/{{ main.probPool.most_attempt_ques }}/'>{{ main.probPool.most_attempt_ques }}</a>)</td>
 	</tr>
 	<tr>
 		<td>Latest Problem Solved</td>
-		<td>{{ main.probPool.latest }}</td>
+		<td><a href='http://www.spoj.com/problems/{{ main.probPool.latest }}/'>{{ main.probPool.latest }}</a></td>
 	</tr>
 	<tr>
 		<td>Average per day</td>

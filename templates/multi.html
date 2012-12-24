@@ -162,13 +162,13 @@ $(document).ready(function() {
 			</tr>
 			<tr class='compare_tr_inv texted'>
 				<td>Most number of Attempts</td>
-				<td>{{ main.most_attempt.0 }} ({{ main.most_attempt_ques.0 }})</td>
-				<td>{{ main.most_attempt.1 }} ({{ main.most_attempt_ques.1 }})</td>
+				<td>{{ main.most_attempt.0 }} (<a href='http://www.spoj.com/problems/{{ main.most_attempt_ques.0 }}/'>{{ main.most_attempt_ques.0 }}</a>)</td>
+				<td>{{ main.most_attempt.1 }} (<a href='http://www.spoj.com/problems/{{ main.most_attempt_ques.1 }}/'>{{ main.most_attempt_ques.1 }}</a>)</td>
 			</tr>
 			<tr>
 				<td>Latest Problem Solved</td>
-				<td>{{ main.latest.0 }}</td>
-				<td>{{ main.latest.1 }}</td>
+				<td><a href='http://www.spoj.com/problems/{{ main.latest.0 }}'>{{ main.latest.0 }}</a></td>
+				<td><a href='http://www.spoj.com/problems/{{ main.latest.1 }}'>{{ main.latest.1 }}</a></td>
 			</tr>
 			<tr class='compare_tr'>
 				<td>Average per day</td>
@@ -221,7 +221,7 @@ $(document).ready(function() {
 		<tbody>
 		{% for key, value in main.table_solved_1.items %}
 			<tr>
-				<td>{{ key }}</td>
+				<td><a href='http://www.spoj.com/problems/{{ key }}/'>{{ key }}</a></td>
 				<td>{{ value }}</td>
 			</tr>
 		{% endfor %}
@@ -240,7 +240,7 @@ $(document).ready(function() {
 		<tbody>
 		{% for key, value in main.table_solved_2.items %}
 			<tr>
-				<td>{{ key }}</td>
+				<td><a href='http://www.spoj.com/problems/{{ key }}/'>{{ key }}</a></td>
 				<td>{{ value }}</td>
 			</tr>
 		{% endfor %}
