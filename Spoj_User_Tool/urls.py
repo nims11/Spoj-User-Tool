@@ -1,5 +1,5 @@
 from django.conf.urls.defaults import *
-from Spoj_User_Tool.views import home, single_user, multi_user
+from Spoj_User_Tool.views import home, single_user, multi_user, about
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 # admin.autodiscover()
@@ -8,6 +8,7 @@ urlpatterns = patterns('',
 	url(r'^$', home),
 	url(r'^user/([a-z]{1}[a-z0-9_]{2,})$', single_user),
 	url(r'^user/([a-z]{1}[a-z0-9_]{2,})/([a-z]{1}[a-z0-9_]{2,})$', multi_user),
+    url(r'^about$', about),
     # Examples:
     # url(r'^$', 'Spoj_User_Tool.views.home', name='home'),
     # url(r'^Spoj_User_Tool/', include('Spoj_User_Tool.foo.urls')),

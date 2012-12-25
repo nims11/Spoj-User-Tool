@@ -34,3 +34,6 @@ def multi_user(request, user_name1, user_name2):
 	user_info2 = get_user_info(user_name2)
 
 	return render(request, 'multi.html', {'main':spojUserMulti(user_info1, user_info2)})
+
+def about(request):
+	return render(request, 'about.html', {})

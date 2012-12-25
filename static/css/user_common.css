@@ -1,0 +1,35 @@
+
+.mini tr td{
+	padding: 5px 5px 5px 5px;
+}
+.mini tr td:nth-child(1){
+	font-style: italic;
+}
+.mini tr td:nth-child(2){
+	text-align: right;
+}
+.mini tr td:nth-child(3){
+	text-align: right;
+}
+.mini tbody tr:hover{
+	background-color: #5F9EA0;
+}
+#back{
+	top: -10px;
+	position: relative;
+	text-align: right;
+}
+th:nth-child(1){
+	text-align: left;
+}
+th:nth-child(2){
+	text-align: right;
+}
+th:nth-child(3){
+	text-align: right;
+}
+th{
+	border-width: 0px 0px 1px 0px;
+	border-style: solid;
+	padding: 5px 0px 5px 0px;
+}
