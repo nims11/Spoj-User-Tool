@@ -21,6 +21,8 @@ def parse_user(user_info_html):
 	"""
 	user_rx = re.compile(r'<H3> *(.*?)\'s user data *</H3>')
 	result = user_rx.match(user_info_html)
+	#foo = str(result.group(1))
+	#raise SpojParserError('User Parsing Error with RegExp')
 	if result == None:
 		raise SpojParserError('User Parsing Error with RegExp')
 	else:
