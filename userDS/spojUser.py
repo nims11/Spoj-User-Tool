@@ -1,7 +1,7 @@
 from units.Lang import Lang
 from units.ProbPool import ProbPool
 from units.Submission import Submission
-from datetime import datetime
+from datetime import datetime, timedelta
 class spojUser:
 	"""
 	Everything needed about the spoj user
@@ -31,6 +31,6 @@ class spojUser:
 		for id in self.classical:
 			ret[id] = '-1 days ago'
 			if self.probPool.main.has_key(id) and self.probPool.main[id].AC:
-				days = (datetime.now()-self.probPool.main[id].first_AC)
+				days = (datetime.now()+timedelta(hours=1)-self.probPool.main[id].first_AC)
 				ret[id] = '%d days ago' % days.days
 		self.classical_table = ret
