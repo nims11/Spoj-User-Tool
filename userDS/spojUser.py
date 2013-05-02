@@ -29,8 +29,8 @@ class spojUser:
 	def get_classical_table(self):
 		ret = {}
 		for id in self.classical:
-			ret[id] = '-1 days ago'
+			ret[id] = '?? days ago'
 			if self.probPool.main.has_key(id) and self.probPool.main[id].AC:
-				days = (datetime.now()+timedelta(hours=1)-self.probPool.main[id].first_AC)
+				days = (datetime.now()+timedelta(hours=2)-self.probPool.main[id].first_AC)
 				ret[id] = '%d days ago' % days.days
 		self.classical_table = ret

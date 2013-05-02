@@ -58,3 +58,9 @@ body {
 #links{
 	float: right;
 }
+.fb-like{
+	z-index: 100;
+	position: fixed;
+	float: right;
+	top: 0px;
+}

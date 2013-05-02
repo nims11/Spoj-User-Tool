@@ -11,6 +11,7 @@
     $(document).ready(function() {
         var curr = $('#topbar').height();
         $('#content').css('margin-top', curr+10);
+        $('.fb-like').css('margin-top', -curr)
     });
     </script>
     <script type="text/javascript">
@@ -28,11 +29,22 @@
     </script>
 </head>
 <body>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=381500825967";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
 <div id='topbar'>
-    <h1><a href='/' class='normal_link'>Spoj User Tool</a></h1>
-    <p id='credit'>By Nims11</p>
-    <hr>
+        <h1><a href='/' class='normal_link'>Spoj User Tool</a></h1>
+        <p id='credit'>By Nims11</p>
+        <hr>
 </div>
+<div class="fb-like" data-href="http://spojtool.appspot.com/" data-send="false" data-width="250" data-show-faces="true"></div>
    	<div id='content'>
     {% block content %}{% endblock %}
 	</div>
