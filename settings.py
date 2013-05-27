@@ -120,6 +120,7 @@ INSTALLED_APPS = (
     'autoload',
     'dbindexer',
     'djangoappengine',
+    'prob_info',
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:

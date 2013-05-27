@@ -44,13 +44,15 @@
 			<tr>
 				<th><a href=''>Problem ID</a></th>
 				<th><a href=''>Solved on</a></th>
-			</td>
+				<th><a href=''>Solved by</a></th>
+			</tr>
 		</thead>
 		<tbody>
 		{% for key, value in main.classical_table.items %}
 			<tr>
 				<td><a href='http://www.spoj.com/problems/{{ key }}/'>{{ key }}</a></td>
-				<td>{{ value }}</td>
+				<td>{{ value.0 }}</td>
+				<td>{{ value.1 }}</td>
 			</tr>
 		{% endfor %}
 		</tbody>

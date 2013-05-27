@@ -1,1 +1,4 @@
 cron:
+- description: daily problem user_count update
+  url: /schedule/user_solved_classical
+  schedule: every 24 hours

@@ -2,6 +2,8 @@ from units.Lang import Lang
 from units.ProbPool import ProbPool
 from units.Submission import Submission
 from datetime import datetime, timedelta
+from prob_info.models import ProblemClassical
+import pickle
 class spojUser:
 	"""
 	Everything needed about the spoj user
@@ -27,10 +29,13 @@ class spojUser:
 		return len(self.classical)
 
 	def get_classical_table(self):
+		users_solved = pickle.loads(ProblemClassical.objects.all()[0].data)
+
 		ret = {}
 		for id in self.classical:
-			ret[id] = '?? days ago'
+			res = '??'
 			if self.probPool.main.has_key(id) and self.probPool.main[id].AC:
 				days = (datetime.now()+timedelta(hours=2)-self.probPool.main[id].first_AC)
-				ret[id] = '%d days ago' % days.days
+				res = str(days.days)
+			ret[id] = (res+' days ago', users_solved.get(id, -1))
 		self.classical_table = ret
