@@ -12,7 +12,10 @@
 	text-align: right;
 }
 .mini tbody tr:hover{
-	background-color: #5F9EA0;
+	border-left-color: red;
+}
+.mini tbody tr{
+	border-left: 2px solid;
 }
 #back{
 	top: -10px;
@@ -32,4 +35,7 @@ th{
 	border-width: 0px 0px 1px 0px;
 	border-style: solid;
 	padding: 5px 0px 5px 0px;
+}
+.charts {
+	display: inline-block;
 }

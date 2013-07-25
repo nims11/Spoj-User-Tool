@@ -11,7 +11,8 @@ def home(request):
 
 def get_user_info(user_name):
 	#html = urllib2.urlopen('http://www.spoj.pl/users/'+user_name).read()
-	#result = urlfetch.fetch('http://localhost/'+user_name+'.htm')
+	#result = urlfetch.fetch('http://localhost/nims11')
+
 	result = urlfetch.fetch('http://www.spoj.pl/users/'+user_name, deadline=30)
 	encoding=result.headers['content-type'].split('charset=')[-1]
 	html = result.content.decode('ISO-8859-2')
@@ -20,8 +21,8 @@ def get_user_info(user_name):
 
 	user_info = user_page_parse(html, user_name)
 	# parsing signed list
-	#signed_html = urllib2.urlopen('http://www.spoj.pl/status/'+user_name+'/signedlist/').read()
-	#signed_html = urllib2.urlopen('http://localhost/'+user_name+'signedlist').read()
+	#signed_html = urllib2.urlopen('http://localhost/signedlist').read()
+
 	signed_html = urlfetch.fetch('http://www.spoj.pl/status/'+user_name+'/signedlist/', deadline=30).content
 	problem_info = signed_list_parse(signed_html, user_info)
 	user_info.probPool.calc_stats()
