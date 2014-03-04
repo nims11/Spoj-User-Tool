@@ -28,45 +28,6 @@
 	$(document).ready(function() {
 		$('#lang_info').tablesorter();
 	});
-
-</script>
-<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-<script type="text/javascript">
-	google.load('visualization', '1.0', {'packages':['corechart']});
-	google.setOnLoadCallback(drawCharts);
-	function drawCharts() {
-		// Languages
-		var data_L = new google.visualization.DataTable();
-		data_L.addColumn('string', 'Language');
-		data_L.addColumn('number', 'Submissions');
-		data_L.addRows([
-			{% for key, value in main.lang.main.items %}
-			['{{key}}', {{value}}],
-			{% endfor %}
-		]);
-		var lang_chart = new google.visualization.PieChart(document.getElementById('lang_info'));
-		lang_chart.draw(data_L, { 'backgroundColor': { fill:'transparent' }, 
-					  'chartArea': {width:'100%', height:'100%'},
-					  'legend': {alignment: 'center'},
-			       	});
-
-		// Submissions
-		var data_S = new google.visualization.DataTable();
-		data_S.addColumn('string', 'Language');
-		data_S.addColumn('number', 'Submissions');
-		data_S.addRows([
-			{% for key, value in main.submission.main.items %}
-			['{{key}}', {{value}}],
-			{% endfor %}
-		]);
-		var sub_chart = new google.visualization.PieChart(document.getElementById('sub_status_info'));
-		sub_chart.draw(data_S, { 'backgroundColor': { fill:'transparent' }, 
-					 'chartArea': {width:'100%', height:'100%'},
-					  'legend': {alignment: 'center'},
-			       		  });
-
-	}
-
 </script>
 {% endblock %}
 
@@ -98,7 +59,7 @@
 	</table>
 	</div>
 </div>
-<h2>Spoj User <a id="username" href="http://www.spoj.pl/users/{{ main.user_name }}">{{ main.user_name }}</a></h2>
+<h2>Spoj User <a id="username" href="http://www.spoj.com/users/{{ main.user_name }}">{{ main.user_name }}</a></h2>
 <hr><br />
 <table id='basic_info' class='mini'>
 <tbody>
@@ -129,7 +90,20 @@
 
 <i><h2>Submission Stats</h2></i>
 <hr class="short_hr"><br />
-<span id="sub_status_info" class='charts'></span>
+<table id='sub_status_info' class='mini'>
+<tbody>
+	<tr>
+		<td>Total</td>
+		<td>{{ main.submission.total }}</td>
+	</tr>
+{% for key, value in main.submission.main.items %}
+	<tr>
+		<td>{{ key }}</td>
+		<td>{{ value }}</td>
+	</tr>
+{% endfor %}
+</tbody>
+</table>
 <br />
 <table id='sub_misc_info' class='mini'>
 <tbody>
@@ -167,7 +141,22 @@
 
 <i><h2>Language Stats</h2></i>
 <hr class="short_hr"><br />
-<span id="lang_info" class='charts'></span>
+<table id='lang_info' class='mini'>
+<thead>
+	<tr>
+		<th><a href=''>Language ID</a></th>
+		<th><a href=''>Submissions</a></th>
+	</tr>
+</thead>
+<tbody>
+{% for key, value in main.lang.main.items %}
+	<tr>
+		<td>{{ key }}</td>
+		<td>{{ value }}</td>
+	</tr>
+{% endfor %}
+</tbody>
+</table>
 <br />
 
 {% endblock %}
