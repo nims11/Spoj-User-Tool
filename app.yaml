@@ -14,6 +14,9 @@ libraries:
 - name: django
   version: latest
 
+- name: lxml
+  version: latest
+
 handlers:
 - url: /_ah/queue/deferred
   script: djangoappengine.deferred.handler.application

@@ -1,4 +1,5 @@
 import re
+from lxml import html as xpathDoc
 from userDS.spojUser import spojUser
 from datetime import datetime
 
@@ -15,86 +16,52 @@ class SpojParserError(Exception):
 	def __str__(self):
 		return repr(self.value)
 
-def parse_user(user_info_html):
+def parse_user(contentTree):
 	"""
 	Parses name of the user_info_html
 	"""
-	user_rx = re.compile(r'<H3> *(.*?)\'s user data *</H3>')
-	result = user_rx.match(user_info_html)
-	#foo = str(result.group(1))
-	#raise SpojParserError('User Parsing Error with RegExp')
-	if result == None:
-		raise SpojParserError('User Parsing Error with RegExp')
-	else:
-		return result.group(1)
+        ret = contentTree.xpath('./table[1]/tr[1]/td[2]//text()')[0]
+        if len(ret) == 0:
+            raise SpojParserError('Cannot Parse username')
+        return ret
 
-def parse_rank(user_info_html):
+def parse_rank(contentTree):
 	"""
 	Parses the world rank of the user
 	"""
-	rank_rx = re.compile(r'.*?<b>Current world rank: <a href="/ranks/users/start=\d+">#(\d+)</a></b>.*?')
-	world_leader_rx = re.compile(r'.*?<b>Current world rank: <a href="/ranks/users/start=0">world leader</a></b>.*?')
-	result = rank_rx.match(user_info_html)
-	if result == None:
-		# If world leader
-		result = world_leader_rx.match(user_info_html)
-		if result == None:
-			raise SpojParserError('World Rank Parsing Error with RegExp')
-		else:
-			return '1'
-	else:
-		return result.group(1)
+        ret = contentTree.xpath('./p[1]//a/text()')[0][1:]
+        if len(ret) == 0:
+            raise SpojParserError('Cannot Parse rank')
+        return ret
 
-def parse_points(user_info_html):
+def parse_points(contentTree):
 	"""
 	Parses the total points of the user
 	"""
-	points_rx = re.compile(r'.*?<p align="center"><b>Current world rank: <a href="/ranks/users/start=\d+">.*?</a></b><br><br>\((\d+\.{0,1}\d*) points\)</p>.*?')
-	result = points_rx.match(user_info_html)
-	if result == None:
-		raise SpojParserError('Points Parsing Error with RegExp')
-	else:
-		return result.group(1)
+        ret = contentTree.xpath('./p[1]/text()')[0].strip()[1:-8]
+        if len(ret) == 0:
+            raise SpojParserError('Cannot Parse points')
+        return ret
 
-def parse_problems(html, user):
+def parse_problems(contentTree):
 	"""
 	Parses the solved Classical Problems
 	"""
-	ret = set([])
-	problem_rx = re.compile(r'.*?<a href="/status/([A-Z0-9_]+)\,'+user+r'/">.*?')
-	html2 = html.split('</td>')
-	for line in html2:
-		result = problem_rx.match(line)
-		if result != None:
-			ret.add(result.group(1))
+        pcodes = contentTree.xpath('.//b[contains(text(), "solved classical problems")]/following::table[1]/tr/td/a/text()')
+	ret = set(pcodes)
 	return ret
 
 def user_page_parse(html, user_name):
 	"""
 	Handles Parsing of the user page
 	"""
-	html = html[html.find(r'<H3>'):]  # Trims the unneccessary starting of the page
-	ret = {}				# dict holding the parsed keys and values
-	if len(html) <4:
-		raise SpojParserError('Assumed Starting Tag not found')
-	end = html.find(
-		'<b title="List of problems to which solutions were submitted but none of them got AC.">TODO list of classical problems:</b>'
-		)
-	if end==-1:
-		raise SpojParserError('Assumed Ending Tag not found')
-	html = html[:end]	# Trims the unneccessary ending of the page
+        doc = xpathDoc.fromstring(html)
+        mainContent = doc.xpath('//td[@class="content0"]//td[@class="content"]')[0]
 
-	user_info_end = html.find('<table class="problems" width="90%">')	# Gets the end for user_info section
-	if user_info_end == -1:
-		raise SpojParserError('Assumed Ending Tag for user_info not found')
-	user_info_html = html[:user_info_end]
-	user_info_html = user_info_html.replace('\n', '')
-	html = html[user_info_end:] 	# Now contains only the solved classical problems part
-
-	name = parse_user(user_info_html)
-	World_Rank = parse_rank(user_info_html)
-	Points = parse_points(user_info_html)
-	Problems = parse_problems(html, user_name)
+	name = parse_user(mainContent)
+	World_Rank = parse_rank(mainContent)
+	Points = parse_points(mainContent)
+	Problems = parse_problems(mainContent)
 	ret = spojUser(name, user_name, World_Rank, Points, Problems)
 	return ret
 

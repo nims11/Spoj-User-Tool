@@ -7,9 +7,9 @@
 	margin-right:auto;
     padding: 15px;
     text-align: center;
-    border: 1px solid rgba(0,0,0,0.5);
+    border: 1px solid rgba(50,102,32,0.5);
     border-radius: 10px 10px 10px 10px;
-    background: rgba(0,0,0,0.25);
+    background: rgba(12,12,14,0.25);
     box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
     -o-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
     -webkit-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
@@ -30,4 +30,7 @@
 input[type='text']:focus{
   outline-style: solid;
   outline-color: red;
+}
+#content{
+  background-color: #000000;
 }

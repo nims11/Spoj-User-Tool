@@ -5,8 +5,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" id="metatag">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js" type="text/javascript"></script>
     <script src="/static/jquery.tablesorter.js" type="text/javascript"></script>
-    {% block head %}{% endblock %}
     <link href='/static/css/base.css' rel='stylesheet' type='text/css'>
+    {% block head %}{% endblock %}
     <script type='text/javascript'>
     $(document).ready(function() {
         var curr = $('#topbar').height();
@@ -49,12 +49,10 @@
     {% block content %}{% endblock %}
 	</div>
     <div id='botbar'>
-        <nav id='links'>
-            <a href="/" class='normal_link'>Home</a> | 
-            <a href="/about" class='normal_link'>About</a> | 
-            <a href="https://github.com/nims11/Spoj-User-Tool" class='normal_link'>Github</a>
-        </nav>
-        <footer>&copy; 2012 Nimesh Ghelani</footer>
+    <div id="frameContain">
+            <iframe id="links" src="http://ghbtns.com/github-btn.html?user=nims11&repo=Spoj-User-Tool&type=watch&count=true&size=large"
+  allowtransparency="true" frameborder="0" scrolling="0" width="110" height="40"></iframe>
+  </div>
     </div>
 </body>
 </html>

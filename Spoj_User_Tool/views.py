@@ -10,20 +10,14 @@ def home(request):
 	return render(request, 'home.html')
 
 def get_user_info(user_name):
-	#html = urllib2.urlopen('http://www.spoj.pl/users/'+user_name).read()
-	#result = urlfetch.fetch('http://localhost/nims11')
-
-	result = urlfetch.fetch('http://www.spoj.com/users/'+user_name, deadline=30)
+	result = urlfetch.fetch('http://www.spoj.com/SPOJ/users/'+user_name, deadline=30)
 	encoding=result.headers['content-type'].split('charset=')[-1]
 	html = result.content.decode('ISO-8859-2')
 	html = html.replace('\n','')
-	#return html
 
 	user_info = user_page_parse(html, user_name)
-	# parsing signed list
-	#signed_html = urllib2.urlopen('http://localhost/signedlist').read()
 
-	signed_html = urlfetch.fetch('http://www.spoj.com/status/'+user_name+'/signedlist/', deadline=30).content
+	signed_html = urlfetch.fetch('http://www.spoj.com/SPOJ/status/'+user_name+'/signedlist/', deadline=30).content
 	problem_info = signed_list_parse(signed_html, user_info)
 	user_info.probPool.calc_stats()
 	user_info.get_classical_table()

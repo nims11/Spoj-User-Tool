@@ -36,11 +36,7 @@ body {
 	padding: 25px 27px 25px 27px;
 }
 #botbar{
-	width: 70%;
-	margin-left: auto;
-	margin-right: auto;
 	margin-top: 20px;
-	background-color:  	#C0C0C0;
 	border-radius: 10px;
 	padding: 25px 27px 25px 27px;	
 }
@@ -55,12 +51,13 @@ body {
 	width: 100%;
 	z-index: 10;
 }
-#links{
-	float: right;
-}
 .fb-like{
 	z-index: 100;
 	position: fixed;
 	float: right;
 	top: 0px;
+}
+#frameContain{
+	width: 100%;
+	text-align: center;
 }
